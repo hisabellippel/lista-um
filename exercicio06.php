@@ -6,27 +6,32 @@
 </head>
 <body>
     <form method = "POST" action="">
-        <label for="numero">Informe um número:</label>
+        <label for="numero">Digite o número que você quer os divisores:</label>
         <input type="number" id="numero" name="numero" required>
-        <button type="submit" name = "verificar">Verificar</button>
+        <button type="submit" name = "divisores">Verificar</button>
     </form>
 
     <?php
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $numero = $_POST['numero'];
 
-    if($numero > 0 and $numero < 11)
-            {
-                for($i = 0; $i < 11; $i++)
-                {
-                    echo "$i / $numero = " . $i/$numero . "<br>";
-                };
-            };
+   
 
+    if (isset($_POST['divisores'])) {
+        $numero = $_POST['numero'];
+        $divisores = [];
 
-    };
+        for ($i = 1; $i <= $numero; $i++) {
+            if ($numero % $i == 0) {
+                $divisores[] = $i;
+            }
+        }
 
+        echo "Os divisores de $numero são: " . implode(", ", $divisores);
+
+};
+  };
     ?>
 </body>
 </html>
